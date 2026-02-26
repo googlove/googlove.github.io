@@ -1,65 +1,44 @@
-jQuery(document).ready(function($) {
-
-
-    /*======= Skillset *=======*/
-    
-    $('.level-bar-inner').css('width', '0');
-    
-    $(window).on('load', function() {
-
-        $('.level-bar-inner').each(function() {
-        
-            var itemWidth = $(this).data('level');
-            
-            $(this).animate({
-                width: itemWidth
-            }, 800);
-            
+document.addEventListener("DOMContentLoaded", () => {
+    // 1. Анімація прогрес-барів для навичок
+    const progressFills = document.querySelectorAll('.progress-fill');
+    setTimeout(() => {
+        progressFills.forEach(fill => {
+            const targetWidth = fill.getAttribute('data-width');
+            fill.style.width = targetWidth;
         });
+    }, 300);
 
-    });
-    
-    /* Bootstrap Tooltip for Skillset */
-    $('.level-label').tooltip();
-    
-    
-    /* jQuery RSS - https://github.com/sdepold/jquery-rss */
-    
-    $("#rss-feeds").rss(
-    
-        //Change this to your own rss feeds
-        "http://feeds.feedburner.com/TechCrunch/startups",
+    // 2. Логіка віджета годинника та дати
+    function updateClock() {
+        const now = new Date();
         
-        {
-        // how many entries do you want?
-        // default: 4
-        // valid values: any integer
-        limit: 3,
+        // Форматування часу
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
         
-        // the effect, which is used to let the entries appear
-        // default: 'show'
-        // valid values: 'show', 'slide', 'slideFast', 'slideSynced', 'slideFastSynced'
-        effect: 'slideFastSynced',
-        
-        // outer template for the html transformation
-        // default: "<ul>{entries}</ul>"
-        // valid values: any string
-        layoutTemplate: "<div class='item'>{entries}</div>",
-        
-        // inner template for each entry
-        // default: '<li><a href="{url}">[{author}@{date}] {title}</a><br/>{shortBodyPlain}</li>'
-        // valid values: any string
-        entryTemplate: '<h3 class="title"><a href="{url}" target="_blank">{title}</a></h3><div><p>{shortBodyPlain}</p><a class="more-link" href="{url}" target="_blank"><i class="fa fa-external-link"></i>Read more</a></div>'
-        
+        const clockElement = document.getElementById('clock');
+        if (clockElement) {
+            clockElement.textContent = `${hours}:${minutes}:${seconds}`;
         }
-    );
-    
-    /* Github Calendar - https://github.com/IonicaBizau/github-calendar */
-    GitHubCalendar("#github-graph", "IonicaBizau");
-    
-    
-    /* Github Activity Feed - https://github.com/caseyscarborough/github-activity */
-    GitHubActivity.feed({ username: "caseyscarborough", selector: "#ghfeed" });
 
-
+        // Форматування дати українською
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        const dateStr = now.toLocaleDateString('uk-UA', options);
+        
+        const dateElement = document.getElementById('date');
+        if (dateElement) {
+            dateElement.textContent = dateStr;
+        }
+        
+        // Оновлення поточного року у футері
+        const yearElement = document.getElementById('current-year');
+        if (yearElement) {
+            yearElement.textContent = now.getFullYear();
+        }
+    }
+    
+    // Запускаємо годинник
+    setInterval(updateClock, 1000);
+    updateClock(); // Перший виклик без затримки
 });
