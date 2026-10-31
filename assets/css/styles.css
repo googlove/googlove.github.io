@@ -9,7 +9,12 @@
 }
 
 /* ======= Базові стилі та Анімований фон ======= */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; overflow-x: hidden; }
+img, iframe { max-width: 100%; }
+
 body {
+    overflow-x: hidden;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     color: var(--text-main);
     margin: 0;
@@ -22,140 +27,3 @@ body {
 }
 
 @keyframes gradientBG {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-a { color: var(--accent); text-decoration: none; transition: 0.3s; }
-a:hover { opacity: 0.7; }
-h1, h2, h3, h4 { font-weight: 600; margin-top: 0; }
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
-/* ======= Glassmorphism Клас ======= */
-.glass-panel {
-    background: var(--glass-bg);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid var(--glass-border);
-    border-radius: 24px;
-    box-shadow: var(--glass-shadow);
-    padding: 30px;
-    margin-bottom: 30px;
-    transition: transform 0.3s ease;
-}
-.glass-panel:hover { transform: translateY(-3px); }
-
-/* ======= Header ======= */
-.header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
-.profile-wrapper { display: flex; align-items: center; gap: 25px; flex-wrap: wrap; }
-.profile-image { width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 3px solid rgba(255,255,255,0.5); }
-.name { font-size: 32px; margin-bottom: 5px; }
-.desc { font-size: 18px; color: var(--text-muted); font-weight: 400; margin-bottom: 10px; }
-.about { font-size: 16px; font-weight: 500; color: #d9381e; }
-
-.social { list-style: none; padding: 0; display: flex; gap: 15px; margin-top: 15px; }
-.social a {
-    display: flex; align-items: center; justify-content: center;
-    width: 40px; height: 40px;
-    background: rgba(255,255,255,0.3);
-    border-radius: 50%; color: var(--text-main);
-    font-size: 20px;
-    backdrop-filter: blur(5px);
-}
-.social a:hover { background: rgba(255,255,255,0.6); transform: scale(1.1); }
-
-/* ======= Віджет Часу (iOS Style) ======= */
-.datetime-widget {
-    text-align: right;
-    background: rgba(255,255,255,0.2);
-    padding: 15px 25px;
-    border-radius: 20px;
-    border: 1px solid var(--glass-border);
-}
-.time { font-size: 36px; font-weight: 700; letter-spacing: -1px; }
-.date { font-size: 14px; font-weight: 500; text-transform: uppercase; color: var(--text-muted); }
-
-/* ======= Layout Grid ======= */
-.main-content { display: grid; grid-template-columns: 2fr 1fr; gap: 30px; }
-
-/* ======= Typography & Content ======= */
-.section-title { font-size: 22px; border-bottom: 1px solid rgba(0,0,0,0.1); padding-bottom: 10px; margin-bottom: 20px; }
-p { line-height: 1.6; margin-bottom: 15px; }
-.highlight { font-weight: 600; color: #000; }
-.mt-4 { margin-top: 1.5rem; }
-
-/* ======= Проєкти (Cards) ======= */
-.projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-}
-.project-card {
-    background: rgba(255,255,255,0.1);
-    border: 1px solid rgba(255,255,255,0.2);
-    border-radius: 16px;
-    padding: 20px;
-    transition: 0.3s;
-}
-.project-card:hover {
-    transform: translateY(-5px);
-    background: rgba(255,255,255,0.25);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-}
-.project-card h3 { font-size: 18px; margin-bottom: 10px; }
-.project-card p { font-size: 14px; color: var(--text-muted); margin-bottom: 20px; }
-.btn-glass {
-    display: inline-block;
-    padding: 8px 16px;
-    background: var(--accent);
-    color: #fff !important;
-    border-radius: 20px;
-    font-size: 14px;
-    font-weight: 500;
-}
-.btn-glass:hover {
-    box-shadow: 0 4px 15px rgba(0, 122, 255, 0.4);
-    opacity: 0.9;
-}
-
-/* ======= Skills Bar ======= */
-.skill-item { margin-bottom: 20px; }
-.skill-header { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 15px; font-weight: 600; }
-.skill-level { color: var(--accent); font-weight: 700; }
-.progress-bar {
-    height: 10px; background: rgba(255,255,255,0.3);
-    border-radius: 10px; overflow: hidden;
-    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
-}
-.progress-fill {
-    height: 100%; background: linear-gradient(90deg, #007aff, #00c6ff);
-    border-radius: 10px; width: 0; transition: width 1.5s ease-out;
-}
-
-/* ======= Maps ======= */
-.map-container { border-radius: 15px; overflow: hidden; }
-iframe { width: 100%; height: 250px; border: none; }
-
-/* ======= Info List ======= */
-.info-list { list-style: none; padding: 0; }
-.info-list li { margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
-.info-list i { color: var(--accent); font-size: 18px; width: 20px; text-align: center; }
-
-/* ======= Responsive ======= */
-@media (max-width: 992px) {
-    .main-content { grid-template-columns: 1fr; }
-}
-@media (max-width: 768px) {
-    .header { flex-direction: column; text-align: center; justify-content: center; }
-    .profile-wrapper { flex-direction: column; }
-    .social { justify-content: center; }
-    .datetime-widget { text-align: center; width: 100%; margin-top: 15px; }
-    .name { font-size: 26px; }
-    .desc { font-size: 16px; }
-}
